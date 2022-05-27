@@ -1,0 +1,157 @@
+---
+'<(META)>':
+  docid: '<^[uuid]^>'
+  name:
+  description: >
+    send commands to the bash inside the VM? ssh?
+    need to decide on best command logic for sending ssh commands several
+    options found
+    List Virtual Machines Located at ware/UserDrives/_z/
+    Run updates and cleanup on OS then make copies of settings
+    Save environmental settings for each vm with primary work scenarios for
+    each environment
+    Maintenance Level 0 will traverse all the user machines
+    @MainST/ware/User_Drives and create corresponding dirs at MainST/data/VMIM
+    and VMIM Substructure
+  version: 0.0.0.0.0.0
+  expire: '<^[expire]^>'
+  here: '<[path]>'
+  outline:
+  '<(WT)>':
+android:
+  android:
+    cmds:
+    files:
+      '<(PATH)>':
+    images:
+      '<(PATH)>':
+    machines:
+      '<(PATH)>':
+    services:
+bsd:
+  bsd:
+    cmds:
+    files:
+      '<(PATH)>':
+    images:
+      '<(PATH)>':
+    machines:
+      '<(PATH)>':
+    services:
+dockr:
+  dockr:
+    cmds:
+      build: >
+        docker build -t <[name]>:<[tag]> <[path]>
+      'exec': >
+        'docker exec -i <[hvc]>'
+      list-images: >
+        docker images
+      list-active-machines: >
+        docker ps -a
+      list-all-machines:
+        docker ps
+      execute: >
+        docker exec <[machine]> <[cmd]>
+    files:
+      '<(PATH)>': '<[DOCKRvrs]>/Files'
+    images:
+      'hvis':
+        '<(PATH)>': '<[DATAvrs]>/EDNs/HVIs'
+      'store': '<[WAREvrs]>/Dockables/Images'
+    machines:
+      '<(PATH)>': '<[DATAvrs]>/EDNs/HVCs'
+    services:
+
+ios:
+  ios:
+    cmds:
+    files:
+      '<(PATH)>':
+    images:
+      '<(PATH)>':
+    machines:
+      '<(PATH)>':
+    services:
+linux:
+  alpine:
+    cmds:
+    files:
+      '<(PATH)>':
+    images:
+      '<(PATH)>':
+    machines:
+      '<(PATH)>':
+    services:
+  ubuntu:
+    cmds:
+      apt-update: >
+        'sudo apt-get update'
+      apt-upgrade: >
+        'sudo apt-get upgrade'
+      apt-autoremove: >
+        'sudo apt-get autoremove'
+      apt-install: >
+        'sudo apt install <[application]>'
+      pip-install: >
+        'pip3 install <[application]>'
+      pip-upgrade-self: >
+        pip install --upgrade pip
+    files:
+      '<(PATH)>':
+    images:
+      '<(PATH)>':
+    machines:
+      '<(PATH)>':
+    python:
+      environments:
+        path: '/home/solubrew/ENVs'
+macos:
+  macos:
+    cmds:
+    files:
+      '<(PATH)>':
+    images:
+      '<(PATH)>':
+    machines:
+      '<(PATH)>':
+    services:
+vbvm:
+  vbvm:
+    cmds:
+      backup:
+      clone: >
+        ew_vm = 'VBOXManage clonevm STAN --name WORK'
+      create: >
+        'vboxmanage createvm -name "<[name]>" -register'
+      create_harddisk: >
+        'vboxmanage createvdi -filename "<[name]>.vdi" -size 10000 -register'
+      modify: >
+        'vboxmanage modifyvm "Ubuntu 8.04 Server" -memory "256MB" -acpi on -boot1 dvd -nic1 nat')
+      register_harddisk: >
+        'vboxmanage registerimage dvd /home/ubuntu-8.04.1-server-i386.iso'
+      start: >
+        'vboxmanage <[device]> startvm'
+      stop: >
+        'vboxmanage <[device]> stopvm'
+      storage_attach: >
+        'bash','VBOXManage storageattach '])#
+      change_uuid: >
+        vboxmanage internalcommands sethduuid <[device_image]>
+    files:
+      '<(PATH)>':
+    images:
+      '<(PATH)>':
+    machines:
+      '<(PATH)>':
+    services:
+windows:
+  windows:
+    cmds:
+    files:
+      '<(PATH)>':
+    images:
+      '<(PATH)>':
+    machines:
+      '<(PATH)>':
+    services:

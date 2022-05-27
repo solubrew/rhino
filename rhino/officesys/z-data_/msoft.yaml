@@ -1,0 +1,51 @@
+---
+<(META)>:
+	DOCid:
+	name:
+	description: >
+	expirary: <[expiration]>
+	version: <[version]>
+	path: <[LEXIvrs]>pheonix/elements/config/config.py
+	outline: <[outline]>
+	authority: document|this
+	security: seclvl2
+	<(WT)>: -32
+access:
+
+word:
+powerpoint:
+vizio:
+project:
+excel:
+	openpyxl:
+		workbook:
+		worksheet:
+		chart:
+		table:
+		datasource:
+			Description: >
+				I believe I will need to develop this myself parsing xml connections file
+		shape:
+		image:
+		cell:
+			errors:
+				outputs: ['#NULL!', '#DIV/0!', '#VALUE!', '#REF!', '#NAME?', '#NUM!', '#N/A']
+			checks:
+				outputs: ['is_date','check_error','check_string','has_style']
+			types:
+				outputs: ['s', 'f', 'n', 'b', 'n', 'inlineStr', 'e', 'str']
+			loci:
+				methods:
+					calls: ['coordinate','column','col_idx','row']
+					outputs:
+			styles:
+				methods:
+					calls: ['encoding','font','fill','border','number_format','data_type','alignment','style','style_id']
+					outputs:
+			values:
+				outputs: ['value','internal_value','hyperlink']
+				setters: []
+			formulas:
+			security: ['protection',]
+			comment: ['comment',]
+			other_attributes: ['offset','comment','parent','quotePrefix','pivotButton','style_id',]

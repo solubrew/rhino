@@ -1,0 +1,17 @@
+---
+meta:
+  DOCid: <^[uuid]^>
+  version: 0.0.0.0.0.0
+  expire: <^[expire]^>
+  here:
+  outline:
+veracrypt:
+  cmds:
+    create: >
+    decrypt: >
+      'veracrypt -t -v --pim=0 -k="" --protect-hidden=no {0} {1} -p "{2}"'
+    encrypt: >
+cryptomator:
+  cmds:
+    decrypt: >
+    encrypt: >

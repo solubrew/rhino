@@ -1,0 +1,18 @@
+<(META)>:
+  docid: <^[uuid]^>
+  name:
+  description: >
+  version: 0.0.0.0.0.0
+  expire: <^[expire]^>
+  here: <[path]>
+  outline:
+  <(WT)>:
+rabbit:
+  cmds:
+  files:
+    <(PATH)>:
+  images:
+    <(PATH)>:
+  machines:
+    <(PATH)>:
+  services:

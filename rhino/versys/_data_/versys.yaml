@@ -1,0 +1,22 @@
+---
+<(META)>:
+  docid:
+  name:
+  description: >
+  expirary: '<[expiration]>'
+  Version: '0.0.0.0.0.0'
+  path: '<[LEXIvrs]>panda/LEXI/'
+  outline: '<[outline]>'
+  authority: 'document|this'
+  security: 'sec|lvl2'
+  <(WT)>: -32
+branches: ['gamma', 'delta', 'zeta', 'alpha', 'beta', 'omega']
+clone:
+commit:
+init:
+pull:
+push:
+roll:
+setup:
+
+tag:
