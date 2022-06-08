@@ -1,17 +1,15 @@
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 '''
 ---
-<(meta)>:
-	DOCid: <^[uuid]^>
+<(META)>:
+	docid: <^[uuid]^>
 	Name:
 	description: >
 	expirary: <[expiration]>
 	Version: <[Version]>
-	path: <[LEXIvrs]>panda/LEXI/
-	outline: <[outline]>
 	authority: document|this
 	security: seclvl2
-	<(wt)>: -32
+	<(WT)>: -32
 '''
 # -*- coding: utf-8 -*-
 #===============================================================================||
@@ -29,24 +27,23 @@ from rhino.ossys import linux
 #===============================================================================||
 here = join(dirname(__file__),'')#						||
 there = abspath(join('../../..'))#												||set path at pheonix level
-version = '0.0.0.0.0.0'#												||
 wolfpack = f'{there}wolf/pack/bash'
 log = True
 #===============================================================================||
+pxcfg = join(abspath(here), '_data_/ossys.yaml')#								||use default configuration
 class linkage(linux.linkage, docker.DockerClient):
-	'Control Docker System Instances'
-	version = '0.0.0.0.0.0'
+	'''Control Docker System Instances'''
 	def __init__(self, cfg=None):
-		pxcfg = '{0}z-data_/ossys.yaml'.format(here)#								||use default configuration
 		self.config = condor.instruct(pxcfg).override(cfg).select('dockr')#		||load configuration file
-#		self.client = docker.from_env()
 		docker.DockerClient.__init__(self)
 		linux.linkage.__init__(self, cfg)
+
 	def load_commands(self):
 		''' '''
 		params = self.config.dikt['dockr']['cmds']#, wolfpack
 		self.dockrCMDs = subtrix.mechanism(params).run()[0]
 		return self
+
 	def backup(self, service, active=False, service_name=None):
 		'''Backup docker service and/or HVC EDN '''
 		if active == True:
@@ -65,6 +62,7 @@ class linkage(linux.linkage, docker.DockerClient):
 			cmd = subtrix.mechanism(cmd, data).run()[0]
 			status = self.run(cmd)#												||
 		return status
+
 	def build(self, text):#														||
 		'''Build a docker image from Dockerfile text Build docker image from
 			dockerfile select build command from docker file '''
@@ -73,6 +71,7 @@ class linkage(linux.linkage, docker.DockerClient):
 			status = self.bashr(cmd)#					||
 			print('Status', status)
 		return self
+
 	def buildTree(self, path):
 		''' '''
 		rdr = fonql.doc(path).read()
@@ -90,6 +89,7 @@ class linkage(linux.linkage, docker.DockerClient):
 					dockrFile = next(txtonql.doc(path).read()).text
 					self.build(dockrFile)
 		return
+
 	def clean(self, what='all'):
 		'''Remove unused or selected assets from the docer system including
 		 	images, containers and volumes'''
@@ -105,12 +105,15 @@ class linkage(linux.linkage, docker.DockerClient):
 		print('Containers', out)
 		out = self.images.prune()
 		print('Images', out)
+
 	def delContainer(client, name):
 		''' '''
 		client.remove_container(name)
+
 	def delImage(client, name):
 		''' '''
 		client.remove_image(name)
+
 	def execute(self, machine, cmd):
 		''' '''
 		dcmd = self.config.dikt['dockr']['cmds']['execute']
@@ -124,15 +127,18 @@ class linkage(linux.linkage, docker.DockerClient):
 			# --rm is not working on killed containers
 			kill_and_remove(ctr_name)
 		return out
+
 	def getContainers(self, how=''):
 		''' '''
 		self.dcontainers = {'live': self.containers.list(all=False),
 								'all': self.containers.list(all=True)}#	||
 		return self
+
 	def getImages(self):
 		''' '''
 		self.dimages = self.images.list()
 		return self
+
 	def hold_containers(self):
 		''' '''
 		self.hold = {'containers': []}
@@ -140,6 +146,7 @@ class linkage(linux.linkage, docker.DockerClient):
 		if profile != None:
 			self.hold['containers'].append([profile['hold']['containers']])#	||
 		return self
+
 	def hold_images(self):
 		''' '''
 		self.hold['images'] = []
@@ -147,6 +154,7 @@ class linkage(linux.linkage, docker.DockerClient):
 		if profile != None:
 			self.hold['images'].append([profile['hold']['images']])#			||
 		return self
+
 	def info(self):
 		''' '''
 		self.containers = self.client.containers.list()
@@ -157,29 +165,35 @@ class linkage(linux.linkage, docker.DockerClient):
 					}, 'images': {'cmd': 'sudo docker images', 'out': '',}}}
 		report = dvc.bashr(cmds)
 		return self
+
 	def kill(self):
 		''' '''
 		cmd = 'sudo docker rmi <[name]>:<[tag]>'
 		cmd = tmplt.thing().run()
 		linux.linkage().bashr(cmd)
+
 	def kill_and_remove(self, ctr_name):
 		''' '''
 		for action in ('kill', 'rm'):
 			p = Popen('docker %s %s' % (action, ctr_name), shell=False,
 													stdout=PIPE, stderr=PIPE)#	||
 			if p.wait() != 0: raise RuntimeError(p.stderr.read())
+
 	def loadDOCKs(self, concern='all'):
 		'''Load docker machines from kwown concerns'''
 		if concern != 'all':
 			self.session = ''
+
 	def postgres(self, cmdn):
 		''' '''
 		app = self.config.dikt['services']['postgres']
 		self.execute(app['cmds'][cmdn])
 		return self
+
 	def prune(self):
 		client.containers.prune()
 		client.images.prune()
+
 	def run(self, image=None, name=None, depth=None):
 		if name == None:
 			name = namer.engine('random').it
@@ -194,9 +208,11 @@ class linkage(linux.linkage, docker.DockerClient):
 			# detached from Popen and we need to remove it after because --rm is not working on killed containers
 			kill_and_remove(ctr_name)
 		return out
+
 	def savContainer():
 		''' '''
 		return
+
 	def saveImage(self, image, tag, name=None, path=None):
 		''' '''
 		if path == None:
@@ -205,6 +221,7 @@ class linkage(linux.linkage, docker.DockerClient):
 		data = {'image': image, 'tag': tag, 'path': path, 'name': name}
 		cmd = subtrix.mechanism(cmd, data).run()[0]
 		return
+
 	def saveImages(self, images=None):
 		''' '''
 		if images == None:
@@ -212,6 +229,7 @@ class linkage(linux.linkage, docker.DockerClient):
 		for image in images:
 			print('Image', image)
 			self.saveImage(image, tag, name)
+
 	def _cleanContainers(self):
 		for container in self.containers['live']:
 			if container not in self.hold['containers']:
@@ -219,6 +237,7 @@ class linkage(linux.linkage, docker.DockerClient):
 		for container in self.containers['all']:
 			if container not in self.hold['containers']:
 				delContainer(client, container)
+
 	def _cleanImages(self):
 		if log: print('Images', self.images.__dir__())
 		for image in self.images['all']:
@@ -243,6 +262,7 @@ def backup_pgs_docker(rte):
 			print('Backup', db)
 			out = linux.linkage().run(cmd)
 			print('Status', out)
+
 def restore_pgs_docker(rte):
 	when = rte['restore_pgs_docker']
 	for db in povsesh.ppov['stores']['DBvrs'].keys():

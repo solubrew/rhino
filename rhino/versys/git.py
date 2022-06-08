@@ -86,10 +86,16 @@ class linkage(object):
 	def tag(self):
 		''' '''
 		msg = '"{CompanyRepoSystem} revision {RevisionNum}" {OptionalCodeVersion} {CommitNum}'
-		out = self.os.bashr('git tag -m {0}'.format(msg))
+		out = self.os.bashr(f'git tag -m {msg}')
 		return out
 
-
+def gitDiff():
+	'''Difference the dirs and files within 2 directories in different git
+		states ignoring the git folders and overwriting changes from a to b
+		also need to remove files and dirs from b that are not in a
+		then run git commands to update the local git this creates increased
+		overhead but begins to reconcile the use of Syncthing with Git and
+		github while maintaining the internal release process being built'''
 #==========================Source Materials=============================||
 '''
 
