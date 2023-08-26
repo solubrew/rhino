@@ -1,0 +1,19 @@
+---
+<(META)>:
+  DOCid: '<(UUID)>'
+  name: '<[document_name]>'
+  description: >
+  version: '<[version]>'
+  path: '<[LEXIvrs]><[path]>.yaml'
+  outline: '<[outline]>'
+  authority: '<[authority]>'
+  security: '<[seclvl]>'
+  <(WT)>: -32
+pgs:
+  cmds:
+    dump: >
+      pg_dump -U <[user]> <[db]> | gzip > <[output_path]>
+    restore: >
+      pg_restore
+    backup: >
+      sonql.doc(<[db]>).backup(<[path]>)

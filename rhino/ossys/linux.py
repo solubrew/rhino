@@ -22,7 +22,6 @@
 
 	expirary: <[expiration]>
 	version: <[version]>
-	path: <[LEXIvrs]>
 	authority: document|this
 	security: sec|lvl2
 	<(WT)>: -32
@@ -37,14 +36,12 @@ import pprint as pp
 #===============================================================================||
 from condor import condor, thing
 from excalc import text as calct
-from fxsquirl.orgnql import fonql
+from squirl.orgnql import fonql
 #===============================================================================||
 here = join(dirname(__file__),'')#						||
-there = abspath(join('../../..'))#						||set path at pheonix level
-version = '0.0.0.0.0.0'#												||
 log = True
 #===============================================================================||
-pxcfg = join(abspath(here), '_data_/ossys.yaml')
+pxcfg = join(abspath(here), '_data_', 'ossys.yaml')
 class linkage(object):
 	def __init__(self, cfg=None):
 		self.config = condor.instruct(pxcfg).select('linux').override(cfg)
@@ -61,7 +58,11 @@ class linkage(object):
 		sb.subprocess('pip upgrade --all && y')
 
 	def bashr(self, cmd, hold=True, toSECs=10000):
-		''' '''
+		'''Execute a bash script
+		 	cmd:= provides the script to be executed
+			hold:=controls wether or not to wait on the command to finish
+			toSECs:=controls how long to wait
+		'''
 		print('CMD', cmd)
 		cwd = self.working_dir
 		self.outs = None
@@ -70,7 +71,7 @@ class linkage(object):
 		process = sbp.Popen( "/bin/bash", shell=False, universal_newlines=True,#||
 									cwd=cwd, stdin=sbp.PIPE, stdout=sbp.PIPE,#	||
 									stderr=sbp.PIPE)#							||
-		if hold == True:
+		if hold:
 			self.outs = process.communicate(cmd, timeout=toSECs)
 		pp.pprint(['OUTs', self.outs])
 		self.lastprocess = process

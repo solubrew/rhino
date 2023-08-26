@@ -1,20 +1,18 @@
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Pheonix@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
-'''  #																	||
----  #																	||
-<(META)>:  #															||
-	DOCid:   #						||
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
+'''  #																			||
+---  #																			||
+<(META)>:  #																	||
+	docid:   #						||
 	name:  #					||
-	description: >  #													||
+	description: >  #															||
 		  #	||
-	expirary: <[expiration]>  #											||
-	version: <[version]>  #												||
-	path: <[LEXIvrs]>  #												||
-	outline: <[outline]>  #												||
-	authority: document|this  #											||
-	security: sec|lvl2  #												||
-	<(WT)>: -32  #														||
-''' #																	||
-# -*- coding: utf-8 -*-#												||
+	expirary: <[expiration]>  #													||
+	version: <[version]>  #														||
+	authority: document|this  #													||
+	security: sec|lvl2  #														||
+	<(WT)>: -32  #																||
+''' #																			||
+# -*- coding: utf-8 -*-#														||
 #================================Core Modules===================================||
 from os import walk#															||
 from os.path import abspath, dirname, exists, join#								||
@@ -26,16 +24,15 @@ except:#																		||
 #================================Pheonix Modules================================||
 from condor import condor, thing#										||
 from excalc import text as calct, tree as calctr#							||
-from fxsquirl.objnql import imgonql#								||
-from fxsquirl.orgnql import monql#								||
-from fxsquirl.orgnql import yonql#								||
+from squirl.objnql import imgonql#								||
+from squirl.orgnql import monql, yonql#								||
 from subtrix import subtrix#									||
 #===============================================================================||
 here = join(dirname(__file__),'')#												||
-there = abspath(join('../../..'))#												||set path at pheonix level
-version = '0.0.0.0.0.0'#														||
 log = True
 #===============================================================================||
+pxcfg = join(abspath(here), '_data_', 'note.yaml')
+
 class book(object):#															||s
 	'''Office notebook creates a generic structure by which various
 		popular notebook files can be created, edited and manipulated.
@@ -71,7 +68,7 @@ class book(object):#															||s
 					3
 	'''#																		||
 	def __init__(self, path, cfg=None):#										||
-		pxcfg = '{0}z-data_/notebook.yaml'.format(here)#						||
+		pxcfg = f'{here}_data_/notebook.yaml'#						||
 		if cfg == None:#														||
 			tipe = 'pheonixNB'#													||
 		elif 'type' in cfg.keys():#												||
@@ -221,10 +218,13 @@ class book(object):#															||s
 		#internally the system is going to use PheonixNB
 		#
 		monql.doc(self.doc['path']).write(self.doc['text'])
+
+
 class cherryNBWriter(object):
+	''' '''
+
 	def __init__(self, name, path, opath, cfg=None):
-		''
-		pxcfg = f'{here}z-data_/note.yaml'.format(here)
+		''' '''
 		self.config = condor.instruct(pxcfg).select('cherrytreeNB')
 		self.config.override(cfg)
 		self.imagelist = self.config.dikt['imageLIST']
@@ -234,9 +234,11 @@ class cherryNBWriter(object):
 		self.img = calctr.stuff(self.imagelist).insideOut().it
 		DOC = self.builder(path, name)
 		self.writeFile(name, opath, DOC)
+
 	def disposition(self, f1l3, action):
+		''' '''
 		if action == 'Kill':#Kill will move the file to a grave and let the life maintenace system take over the handling of the file
-			grave = mps+'/History/'+tdy
+			grave = f'{mps}/History/{tdy}'
 #			if not os.path.exists(grave):
 #				os.makedirs(grave)
 #			shutil.move(f1l3,grave)
@@ -249,35 +251,34 @@ class cherryNBWriter(object):
 		elif action == 'Relocate':#move the file to a new sturctured home
 			shutil.copyfile2(f1l3,action['home'])
 			return
-	def sanitize(self, content):#
-		content = calct.stuff(content).removeBlankLines().it
-		content = content.replace('&','&amp;')#
-		content = content.replace('<','&lt;')#
-		content = content.replace('>','&gt;')#
-		content = content.replace('"','&quot;')#
-		return content#
-	def top_node(self, node, name,content):#
+
+
+
+	def top_node(self, node, name, content):#
+		''' '''
 		tabs = ''#
 		for i in range(node['depth']+2):#
-			tabs += ('\t')#
-			name = self.sanitize(name)
-		DOC = '{0}<node name="{1}" prog_lang="{2}" readonly="False" '.format(tabs, name, node['lang'])
-		DOC += 'tags="" unique_id="{0}">\n'.format(str(node['nid']))#+str(node['depth'])+'\n'
-		DOC += '{0}\t<rich_text>\n{1}\n'.format(tabs, content)
-		DOC += '{0}\t</rich_text>\n'.format(tabs)
+			f'{tabs}\t'#
+		name = sanitize(name)
+		DOC = f'{tabs}<node name="{name}" '#									||
+		DOC += 'prog_lang="{0}" readonly="False" '.format(node['lang'])#		||this formatting required
+		DOC += 'tags="" unique_id="{0}">\n'.format(str(node['nid']))#			||
+		DOC = f'{DOC}{tabs}\t<rich_text>\n{content}\n{tabs}\t</rich_text>\n'#	||
 		return DOC
+
 	def end_node(self, node, name):
+		''' '''
 		tabs = ''
 		for i in range(node['depth']+2):
-			tabs += ('\t')
-		return (tabs+'</node>'+'\n')#+str(node['depth'])+'\n')
+			f'{tabs}\t'
+		return (f'{tabs}</node>\n')
+
 	def builder(self, path, name):
+		''' '''
 		f1l3_5ub5y5t3m = walk(path,topdown=True,
 									onerror=None,followlinks=False)#	||
 		DOC = '<?xml version="1.0" ?>\n\t<cherrytree>\n'
-		depth = 0
-		ncnt = 0
-		oldp4th = {}
+		depth, ncnt, oldp4th = 0, 0, {}
 		oldp4th[0] = ''
 		for p4th, d1r5, f1l35 in f1l3_5ub5y5t3m:
 			if ncnt >= self.depth_lock and self.depth_lock != 0:
@@ -304,46 +305,69 @@ class cherryNBWriter(object):
 			for f1l3 in f1l35:
 				ext = f1l3[len(p4th[:f1l3.rfind('.')]):]
 				if self.config.dikt['content'] == True:
+					content = ''
 					if ext.lower() in self.img:
 						try:
-							b64 = imgonql.doc(path+'/'+f1l3)
-							if ext != '.png':
-								b64.convert(ext)
-							img = b64.encode().resize(800).it.decode('utf-8')
-							content = '\t</rich_text>\n<encoded_png char_offset="0">'
-							content = '{0}{1}</encoded_png>\t<rich_text>\n'.format(content, str(img))
+							content = encodeImage(p4th, f1l3, content, ext)
 						except Exception as e:
-							content = path+'/'+f1l3
+							content = f'{path}/{f1l3}'
 					elif ext.lower() in self.lang.keys():
-						dispose = 1
-						try:
-							with open('{0}/{1}'.format(p4th, f1l3),'r') as d0c:
-								content = self.sanitize(d0c.read())+'\n'
-						except Exception as e:
-							dispose = 0
-							ext = '.txt'
-							print('Open Content Failed', e)
-							continue
-						d0c.closed
-						if dispose == 1:
-							self.disposition('{0}/{1}'.format(p4th,f1l3),'Hold')
+						content = encodeText(p4th, f1l3)
+						if not content:
+							content, ext = '', '.txt'
+							self.disposition(f'{p4th}/{f1l3}','Hold')
 					else:
 						ext = '.txt'
 					ncnt += 1
-				options = {'lang': self.lang[ext.lower()], 'nid': ncnt, 'depth': depth}
-				DOC += self.top_node(options,f1l3,content)
-				content = ''
-				options = {'depth':depth}
+				options = {'lang': self.lang[ext.lower()], 'nid': ncnt,
+																'depth': depth}
+				DOC += self.top_node(options, f1l3, content)
+				content, options = '', {'depth':depth}
 				DOC += self.end_node(options,f1l3)
-		print('Close Doc')
+		if log: print('Close Doc')
 		while depth > 0:
 			depth += -1
-			options = {'depth':depth}
-			DOC += self.end_node(options,'')
-		DOC += '\t</cherrytree>\n'
-		return DOC
+			DOC += self.end_node({'depth':depth}, '')
+		return f'{DOC}\t</cherrytree>\n'
+
 	def writeFile(self, name, opath, DOC):
 		opath += f'/{name}.ctd'
 		with open(opath,'w') as tr33:
 			tr33.write(DOC)
 		tr33.closed
+
+def encodeText(path, phile):
+	''' '''
+	content = ''
+	try:
+		with open(f'{path}/{phile}','r') as doc:
+			content = sanitize(doc.read())+'\n'
+		doc.closed
+	except Exception as e:
+		print('Open Content Failed', e)
+		return False
+	return content
+
+def encodeImage(path, phile, content, ext):
+	''' '''
+	b64 = imgonql.doc(f'{p4th}/{f1l3}')
+	if ext != '.png':
+		b64.convert(ext)
+	img = str(b64.encode().resize(800).it.decode('utf-8'))
+	content = '\t</rich_text>\n<encoded_png char_offset="0">'
+	return f'{content}{img}</encoded_png>\t<rich_text>\n'
+
+def sanitize(content):#
+	''' '''
+	content = calct.stuff(content).removeBlankLines().it
+	content = content.replace('&','&amp;')#
+	content = content.replace('<','&lt;')#
+	content = content.replace('>','&gt;')#
+	content = content.replace('"','&quot;')#
+	return content#
+
+#==============================Source Materials=================================||
+'''
+
+'''
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

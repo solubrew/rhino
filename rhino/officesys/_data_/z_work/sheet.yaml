@@ -1,0 +1,231 @@
+['__module__', '__doc__', '__slots__', 'ERROR_CODES', 'TYPE_STRING', 'TYPE_FORMULA', 'TYPE_NUMERIC', 'TYPE_BOOL', 'TYPE_NULL', 'TYPE_INLINE', 'TYPE_ERROR', 'TYPE_FORMULA_CACHE_STRING', 'VALID_TYPES', '__init__', 'coordinate', 'column', 'encoding', 'base_date', 'guess_types', '__repr__', 'check_string', 'check_error', 'set_explicit_value', '_bind_value', '_infer_value', '_cast_numeric', '_cast_percentage', '_cast_time', '_set_time_format', 'value', 'internal_value', 'hyperlink', 'is_date', 'offset', 'comment', '_comment', '_hyperlink', '_value', 'col_idx', 'data_type', 'parent', 'row', 'font', 'fill', 'border', 'number_format', 'protection', 'alignment', 'style', 'quotePrefix', 'pivotButton', 'style_id', 'has_style', '_style', '__hash__', '__str__', '__getattribute__', '__setattr__', '__delattr__', '__lt__', '__le__', '__eq__', '__ne__', '__gt__', '__ge__', '__new__', '__reduce_ex__', '__reduce__', '__subclasshook__', '__init_subclass__', '__format__', '__sizeof__', '__dir__', '__class__']
+
+_WorkbookChild__parent: <openpyxl.workbook.workbook.Workbook object at 0x7f66938724a8>
+_WorkbookChild__title: CapacitySummary
+
+HeaderFooter: <openpyxl.worksheet.header_footer.HeaderFooter object>
+Parameters:
+differentOddEven=None, differentFirst=None, scaleWithDoc=None, alignWithMargins=None, oddHeader=<openpyxl.worksheet.header_footer.HeaderFooterItem object at 0x7f6693848320>, oddFooter=<openpyxl.worksheet.header_footer.HeaderFooterItem object at 0x7f6693848400>, evenHeader=<openpyxl.worksheet.header_footer.HeaderFooterItem object at 0x7f6693848588>, evenFooter=<openpyxl.worksheet.header_footer.HeaderFooterItem object at 0x7f6693848630>, firstHeader=<openpyxl.worksheet.header_footer.HeaderFooterItem object at 0x7f6693848668>, firstFooter=<openpyxl.worksheet.header_footer.HeaderFooterItem object at 0x7f66938487f0>
+
+row_dimensions: defaultdict(<bound method Worksheet._add_row of <Worksheet "CapacitySummary">>, {1: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f6693751048>, 2: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f6693751090>, 7: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f66937ae288>, 8: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f66937ae990>, 11: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f66937b4cf0>, 13: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f66937babd0>, 20: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f66937c7e10>})
+column_dimensions: defaultdict(<bound method Worksheet._add_column of <Worksheet "CapacitySummary">>, {'A': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc678>, 'B': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc708>, 'C': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc798>, 'D': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc828>, 'E': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc8b8>, 'F': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc948>, 'G': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc9d8>, 'H': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cca68>, 'I': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccaf8>, 'J': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccb88>, 'K': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccc18>, 'L': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccca8>, 'M': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccd38>, 'N': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccdc8>, 'O': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cce58>, 'P': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccee8>, 'Q': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccf78>})
+
+page_breaks: <openpyxl.worksheet.pagebreak.PageBreak object>
+Parameters:
+count=0, manualBreakCount=0, brk=[]
+
+data_validations: <openpyxl.worksheet.datavalidation.DataValidationList object>
+Parameters:
+disablePrompts=None, xWindow=None, yWindow=None, count=0, dataValidation=[]
+
+sheet_state: visible
+
+page_setup: <openpyxl.worksheet.page.PrintPageSetup object>
+Parameters:
+orientation='portrait', paperSize=None, scale=None, fitToHeight=None, fitToWidth=None, firstPageNumber=None, useFirstPageNumber=None, paperHeight=None, paperWidth=None, pageOrder=None, usePrinterDefaults=None, blackAndWhite=None, draft=None, cellComments=None, errors=None, horizontalDpi=None, verticalDpi=None, copies=None, id=None
+
+print_options: <openpyxl.worksheet.page.PrintOptions object>
+Parameters:
+horizontalCentered=None, verticalCentered=None, headings=None, gridLines=None, gridLinesSet=None
+
+page_margins: <openpyxl.worksheet.page.PageMargins object>
+Parameters:
+left=0.7, right=0.7, top=0.75, bottom=0.75, header=0.3, footer=0.3
+
+views: <openpyxl.worksheet.views.SheetViewList object>
+Parameters:
+sheetView=[<openpyxl.worksheet.views.SheetView object>
+Parameters:
+windowProtection=None, showFormulas=None, showGridLines=None, showRowColHeaders=None, showZeros=None, rightToLeft=None, tabSelected=True, showRuler=None, showOutlineSymbols=None, defaultGridColor=None, showWhiteSpace=None, view=None, topLeftCell='A4', colorId=None, zoomScale=90, zoomScaleNormal=90, zoomScaleSheetLayoutView=None, zoomScalePageLayoutView=None, zoomToFit=None, workbookViewId=0, pane=None, selection=[<openpyxl.worksheet.views.Selection object>
+Parameters:
+pane=None, activeCell='F21', activeCellId=None, sqref='F21']]
+protection: <openpyxl.worksheet.protection.SheetProtection object>
+Parameters:
+selectLockedCells=False, selectUnlockedCells=False, algorithmName=None, sheet=False, objects=False, insertRows=True, insertHyperlinks=True, autoFilter=True, scenarios=False, formatColumns=True, deleteColumns=True, insertColumns=True, pivotTables=True, deleteRows=True, formatCells=True, saltValue=None, formatRows=True, sort=True, spinCount=None, password=None, hashValue=None
+
+auto_filter: <openpyxl.worksheet.filters.AutoFilter object>
+Parameters:
+ref=None, filterColumn=[], sortState=None
+
+sort_state: <openpyxl.worksheet.filters.SortState object>
+Parameters:
+columnSort=None, caseSensitive=None, sortMethod=None, ref=None, sortCondition=[]
+
+paper_size: None
+
+formula_attributes: {}
+
+orientation: None
+
+conditional_formatting: <openpyxl.formatting.formatting.ConditionalFormattingList object at 0x7f6693848c50>
+
+legacy_drawing: None
+
+sheet_properties: <openpyxl.worksheet.properties.WorksheetProperties object>
+Parameters:
+codeName=None, enableFormatConditionsCalculation=None, filterMode=None, published=None, syncHorizontal=None, syncRef=None, syncVertical=None, transitionEvaluation=None, transitionEntry=None, tabColor=None, outlinePr=<openpyxl.worksheet.properties.Outline object>
+Parameters:
+applyStyles=None, summaryBelow=True, summaryRight=True, showOutlineSymbols=None, pageSetUpPr=<openpyxl.worksheet.properties.PageSetupProperties object>
+Parameters:
+autoPageBreaks=None, fitToPage=None
+
+sheet_format: <openpyxl.worksheet.dimensions.SheetFormatProperties object>
+Parameters:
+baseColWidth=8, defaultColWidth=None, defaultRowHeight=15.0, customHeight=None, zeroHeight=None, thickTop=None, thickBottom=None, outlineLevelRow=None, outlineLevelCol=None
+__module__: openpyxl.worksheet.worksheet
+__doc__: Represents a worksheet.
+    Do not create worksheets yourself,
+    use :func:`openpyxl.workbook.Workbook.create_sheet` instead
+
+
+_rel_type: worksheet
+_path: /xl/worksheets/sheet{0}.xml
+
+mime_type: application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml
+BREAK_NONE: 0
+BREAK_ROW: 1
+BREAK_COLUMN: 2
+SHEETSTATE_VISIBLE: visible
+SHEETSTATE_HIDDEN: hidden
+SHEETSTATE_VERYHIDDEN: veryHidden
+PAPERSIZE_LETTER: 1
+PAPERSIZE_LETTER_SMALL: 2
+PAPERSIZE_TABLOID: 3
+PAPERSIZE_LEDGER: 4
+PAPERSIZE_LEGAL: 5
+PAPERSIZE_STATEMENT: 6
+PAPERSIZE_EXECUTIVE: 7
+PAPERSIZE_A3: 8
+PAPERSIZE_A4: 9
+PAPERSIZE_A4_SMALL: 10
+PAPERSIZE_A5: 11
+ORIENTATION_PORTRAIT: portrait
+ORIENTATION_LANDSCAPE: landscape
+
+sheet_view: <openpyxl.worksheet.views.SheetView object>
+Parameters:
+windowProtection=None, showFormulas=None, showGridLines=None, showRowColHeaders=None, showZeros=None, rightToLeft=None, tabSelected=True, showRuler=None, showOutlineSymbols=None, defaultGridColor=None, showWhiteSpace=None, view=None, topLeftCell='A4', colorId=None, zoomScale=90, zoomScaleNormal=90, zoomScaleSheetLayoutView=None, zoomScalePageLayoutView=None, zoomToFit=None, workbookViewId=0, pane=None, selection=[<openpyxl.worksheet.views.Selection object>
+Parameters:
+pane=None, activeCell='F21', activeCellId=None, sqref='F21']
+
+selected_cell: F21
+active_cell: F21
+show_gridlines: None
+show_summary_below: True
+show_summary_right: True
+
+vba_code: <generator object vba_code at 0x7f6675a2beb8>
+
+get_cell_collection: <bound method Worksheet.get_cell_collection of <Worksheet "CapacitySummary">>
+freeze_panes: None
+add_print_title: <bound method Worksheet.add_print_title of <Worksheet "CapacitySummary">>
+
+cell: <bound method Worksheet.cell of <Worksheet "CapacitySummary">>
+
+_get_cell: <bound method Worksheet._get_cell of <Worksheet "CapacitySummary">>
+_add_cell: <bound method Worksheet._add_cell of <Worksheet "CapacitySummary">>
+__getitem__: <bound method Worksheet.__getitem__ of <Worksheet "CapacitySummary">>
+__setitem__: <bound method Worksheet.__setitem__ of <Worksheet "CapacitySummary">>
+__iter__: <bound method Worksheet.__iter__ of <Worksheet "CapacitySummary">>
+__delitem__: <bound method Worksheet.__delitem__ of <Worksheet "CapacitySummary">>
+
+min_row: 1
+max_row: 97
+min_column: 1
+max_column: 19
+
+calculate_dimension: <bound method Worksheet.calculate_dimension of <Worksheet "CapacitySummary">>
+
+dimensions: A1:S97
+
+iter_rows: <bound method Worksheet.iter_rows of <Worksheet "CapacitySummary">>
+
+_cells_by_row: <bound method Worksheet._cells_by_row of <Worksheet "CapacitySummary">>
+
+rows: <generator object Worksheet._cells_by_row at 0x7f6675a2beb8>
+values: <generator object values at 0x7f6675b2b410>
+
+iter_cols: <bound method Worksheet.iter_cols of <Worksheet "CapacitySummary">>
+
+_cells_by_col: <bound method Worksheet._cells_by_col of <Worksheet "CapacitySummary">>
+
+columns: <generator object Worksheet._cells_by_col at 0x7f6675a2beb8>
+get_squared_range: <bound method Worksheet.get_squared_range of <Worksheet "CapacitySummary">>
+get_named_range: <bound method Worksheet.get_named_range of <Worksheet "CapacitySummary">>
+set_printer_settings: <bound method Worksheet.set_printer_settings of <Worksheet "CapacitySummary">>
+add_data_validation: <bound method Worksheet.add_data_validation of <Worksheet "CapacitySummary">>
+add_chart: <bound method Worksheet.add_chart of <Worksheet "CapacitySummary">>
+add_image: <bound method Worksheet.add_image of <Worksheet "CapacitySummary">>
+add_table: <bound method Worksheet.add_table of <Worksheet "CapacitySummary">>
+add_pivot: <bound method Worksheet.add_pivot of <Worksheet "CapacitySummary">>
+merge_cells: <bound method Worksheet.merge_cells of <Worksheet "CapacitySummary">>
+
+_clean_merge_range: <bound method Worksheet._clean_merge_range of <Worksheet "CapacitySummary">>
+
+merged_cell_ranges: [<MergeCell C23:O35>, <MergeCell I9:K9>, <MergeCell I21:L21>]
+unmerge_cells: <bound method Worksheet.unmerge_cells of <Worksheet "CapacitySummary">>
+append: <bound method Worksheet.append of <Worksheet "CapacitySummary">>
+
+_move_cells: <bound method Worksheet._move_cells of <Worksheet "CapacitySummary">>
+
+insert_rows: <bound method Worksheet.insert_rows of <Worksheet "CapacitySummary">>
+insert_cols: <bound method Worksheet.insert_cols of <Worksheet "CapacitySummary">>
+delete_rows: <bound method Worksheet.delete_rows of <Worksheet "CapacitySummary">>
+delete_cols: <bound method Worksheet.delete_cols of <Worksheet "CapacitySummary">>
+https'://support.office.com/en-us/article/excel-functions-alphabetical-b3944572-255d-4efb-bb96-c6d90033e188
+
+_invalid_row: <bound method Worksheet._invalid_row of <Worksheet "CapacitySummary">>
+_add_column: <bound method Worksheet._add_column of <Worksheet "CapacitySummary">>
+_add_row: <bound method Worksheet._add_row of <Worksheet "CapacitySummary">>
+_write: <bound method Worksheet._write of <Worksheet "CapacitySummary">>
+
+print_title_rows: None
+print_title_cols: None
+print_titles: None
+print_area: None
+
+parent: <openpyxl.workbook.workbook.Workbook object at 0x7f66938724a8>
+encoding: utf-8
+title: CapacitySummary
+
+oddHeader:
+oddFooter:
+evenHeader:
+evenFooter:
+firstHeader:
+firstFooter:
+
+path: /xl/worksheets/sheetNone.xml
+
+__dict__: {'_WorkbookChild__parent': <openpyxl.workbook.workbook.Workbook object at 0x7f66938724a8>, '_WorkbookChild__title': 'CapacitySummary', 'HeaderFooter': <openpyxl.worksheet.header_footer.HeaderFooter object>
+Parameters:
+differentOddEven=None, differentFirst=None, scaleWithDoc=None, alignWithMargins=None, oddHeader=<openpyxl.worksheet.header_footer.HeaderFooterItem object at 0x7f6693848320>, oddFooter=<openpyxl.worksheet.header_footer.HeaderFooterItem object at 0x7f6693848400>, evenHeader=<openpyxl.worksheet.header_footer.HeaderFooterItem object at 0x7f6693848588>, evenFooter=<openpyxl.worksheet.header_footer.HeaderFooterItem object at 0x7f6693848630>, firstHeader=<openpyxl.worksheet.header_footer.HeaderFooterItem object at 0x7f6693848668>, firstFooter=<openpyxl.worksheet.header_footer.HeaderFooterItem object at 0x7f66938487f0>, 'row_dimensions': defaultdict(<bound method Worksheet._add_row of <Worksheet "CapacitySummary">>, {1: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f6693751048>, 2: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f6693751090>, 7: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f66937ae288>, 8: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f66937ae990>, 11: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f66937b4cf0>, 13: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f66937babd0>, 20: <openpyxl.worksheet.dimensions.RowDimension object at 0x7f66937c7e10>}), 'column_dimensions': defaultdict(<bound method Worksheet._add_column of <Worksheet "CapacitySummary">>, {'A': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc678>, 'B': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc708>, 'C': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc798>, 'D': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc828>, 'E': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc8b8>, 'F': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc948>, 'G': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cc9d8>, 'H': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cca68>, 'I': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccaf8>, 'J': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccb88>, 'K': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccc18>, 'L': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccca8>, 'M': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccd38>, 'N': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccdc8>, 'O': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937cce58>, 'P': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccee8>, 'Q': <openpyxl.worksheet.dimensions.ColumnDimension object at 0x7f66937ccf78>}), 'page_breaks': <openpyxl.worksheet.pagebreak.PageBreak object>
+Parameters:
+c
+disablePrompts=None, xWindow=None, yWindow=None, count=0, dataValidation=[], '_hyperlinks': [], 'sheet_state': 'visible', 'page_setup': <openpyxl.worksheet.page.PrintPageSetup object>
+Parameters:
+orientation='portrait', paperSize=None, scale=None, fitToHeight=None, fitToWidth=None, firstPageNumber=None, useFirstPageNumber=None, paperHeight=None, paperWidth=None, pageOrder=None, usePrinterDefaults=None, blackAndWhite=None, draft=None, cellComments=None, errors=None, horizontalDpi=None, verticalDpi=None, copies=None, id=None, 'print_options': <openpyxl.worksheet.page.PrintOptions object>
+Parameters:
+horizontalCentered=None, verticalCentered=None, headings=None, gridLines=None, gridLinesSet=None, '_print_rows': None, '_print_cols': None, '_print_area': None, 'page_margins': <openpyxl.worksheet.page.PageMargins object>
+Parameters:
+left=0.7, right=0.7, top=0.75, bottom=0.75, header=0.3, footer=0.3, 'views': <openpyxl.worksheet.views.SheetViewList object>
+Parameters:
+sheetView=[<openpyxl.worksheet.views.SheetView object>
+Parameters:
+windowProtection=None, showFormulas=None, showGridLines=None, showRowColHeaders=None, showZeros=None, rightToLeft=None, tabSelected=True, showRuler=None, showOutlineSymbols=None, defaultGridColor=None, showWhiteSpace=None, view=None, topLeftCell='A4', colorId=None, zoomScale=90, zoomScaleNormal=90, zoomScaleSheetLayoutView=None, zoomScalePageLayoutView=None, zoomToFit=None, workbookViewId=0, pane=None, selection=[<openpyxl.worksheet.views.Selection object>
+Parameters:
+pane=None, activeCell='F21', activeCellId=None, sqref='F21']], 'protection': <openpyxl.worksheet.protection.SheetProtection object>
+Parameters:
+selectLockedCells=False, selectUnlockedCells=False, algorithmName=None, sheet=False, objects=False, insertRows=True, insertHyperlinks=True, autoFilter=True, scenarios=False, formatColumns=True, deleteColumns=True, insertColumns=True, pivotTables=True, deleteRows=True, formatCells=True, saltValue=None, formatRows=True, sort=True, spinCount=None, password=None, hashValue=None, '_current_row': 97, 'auto_filter': <openpyxl.worksheet.filters.AutoFilter object>
+Parameters:
+ref=None, filterColumn=[], sortState=None, 'sort_state': <openpyxl.worksheet.filters.SortState object>
+Parameters:
+columnSort=None, caseSensitive=None, sortMethod=None, ref=None, sortCondition=[], 'paper_size': None, 'formula_attributes': {}, 'orientation': None, 'conditional_formatting': <openpyxl.formatting.formatting.ConditionalFormattingList object at 0x7f6693848c50>, 'legacy_drawing': None, 'sheet_properties': <openpyxl.worksheet.properties.WorksheetProperties object>
+Parameters:
+codeName=None, enableFormatConditionsCalculation=None, filterMode=None, published=None, syncHorizontal=None, syncRef=None, syncVertical=None, transitionEvaluation=None, transitionEntry=None, tabColor=None, outlinePr=<openpyxl.worksheet.properties.Outline object>
+Parameters:
+applyStyles=None, summaryBelow=True, summaryRight=True, showOutlineSymbols=None, pageSetUpPr=<openpyxl.worksheet.properties.PageSetupProperties object>
+Parameters:
+autoPageBreaks=None, fitToPage=None, 'sheet_format': <openpyxl.worksheet.dimensions.SheetFormatProperties object>
+Parameters:
+baseColWidth=8, defaultColWidth=None, defaultRowHeight=15.0, customHeight=None, zeroHeight=None, thickTop=None, thickBottom=None, outlineLevelRow=None, outlineLevelCol=None}

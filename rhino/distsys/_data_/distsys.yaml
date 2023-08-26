@@ -1,0 +1,65 @@
+<(META)>:
+  docid: <^[uuid]^>
+  name:
+  description: >
+  version: 0.0.0.0.0.0
+  expire: <^[expire]^>
+  here: <[path]>
+  outline:
+  <(WT)>:
+circus:
+  cmds:
+  files:
+    <(PATH)>:
+  images:
+    <(PATH)>:
+  machines:
+    <(PATH)>:
+  services:
+fabric:
+  cmds:
+  files:
+    <(PATH)>:
+  images:
+    <(PATH)>:
+  machines:
+    <(PATH)>:
+  services:
+syncthing:
+  syncthing:
+    cmds:
+      cleanup: >
+      setup: >
+      start: >
+      stop: >
+  linux:
+    cmds:
+      config_path: >
+        /home/<[user]>/.config/syncthing
+    files:
+      <(PATH)>:
+    images:
+      <(PATH)>:
+    machines:
+      <(PATH)>:
+    services:
+  windows:
+    cmds:
+      config_path: >
+        C:\\Users\\<[user]>\\AppData\\Local\\Syncthing
+    files:
+      <(PATH)>:
+    images:
+      <(PATH)>:
+    machines:
+      <(PATH)>:
+    services:
+wormhole:
+  cmds:
+  files:
+    <(PATH)>:
+  images:
+    <(PATH)>:
+  machines:
+    <(PATH)>:
+  services:

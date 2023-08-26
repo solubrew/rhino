@@ -23,6 +23,7 @@
 import os, json
 #===========================3rd Party Modules===========================||
 import openpyxl as xl
+from pandas import read_csv, read_excel
 from yaml import load as yload, dump as ydump#									||
 try:#																			||
 	from yaml import CLoader as Loader, CDumper as Dumper#						||
@@ -38,6 +39,7 @@ l = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R',#	|
 class book(object):
 	def __init__(self):
 		''' '''
+
 def getLetter(coln):#															||
 	cnt, ltr = -1, ''#															||
 	while coln > 25:#															||
@@ -51,89 +53,13 @@ def getLetter(coln):#															||
 		ltr += l[cnt]#															||
 	ltr += l[coln]#																||
 	return ltr#																	||
-class workBookWriter(object):
-	def __init__(self):
-		try:
-			self.wb = xl.Workbook()
-		except Exception as e:
-			print('workbook create failed',e)
-		self.createFormats()
-	def creWS(self, name):
-		''
-#		print('Sheet Name',name)
-#		if '/' in name:
-#			name = name.replace('/','')
-		name = sanSheetName(name)
-		return self.wb.create_sheet(title=name)
-	def createFormats(self, cfgs=None):
-		''
 
-		if cfgs == None:
-			FORMATS = getYAML('{0}z-data_/xl.yaml'.format(here))
-		else:
-			FORMATS = getYAML('{0}'.format(cfgs['xl']))
-#		cfg = 'z-data_/xl.yaml'.format(here)
-#		FORMATS = config.instruct(cfg).load().dikt['areas']
-		for style in sorted(FORMATS['areas'].keys()):
-			cfg = FORMATS['areas'][style]
-			self.wb.add_named_style(createStyle(style, cfg))
-	def setColumnWidths(self, ws, mapp):
-		''
-		for col in sorted(mapp.keys()):
-			ws.column_dimensions[col].width = mapp[col]
-	def setRowHeights(self, ws, mapp):
-		''
-		for row in sorted(mapp.keys()):
-			ws.row_dimensions[row].height = mapp[row]
-	def mapTable2Cells(self, ws, datat):#								||
-		''
-		rcnt = 1#														||
-		datat.sort()
-		for row in datat:#												||
-			ccnt = 1#													||
-			row.sort()
-			for col in row:#											||
-				_ = ws.cell(column=ccnt, row=rcnt,)#	||
-				setCellValue(_, col)
-				ccnt += 1
-			rcnt += 1
-	def mapDict2Cells(self, ws, datad):
-		''
-		for key in sorted(datad.keys()):
-#			print('mapDict2Cells Key',key)
-			val = datad[key]
-#			print('XLDict Key',key,'value',val)
-#			print('mapDict2Cells',ws[key],ws[key].col_idx)
-			try:
-				_ = ws.cell(column=ws[key].col_idx, row=ws[key].row)#	||
-			except Exception as e:
-				print('Map Cell Failed key',key,e,ws[key])
-			self.setCellValue(_, val)
-	def setCellValue(self, cell, val, cfg=None):
-		lock = 0
-		if val == '' or val == None:
-			lock = 2
-		if '=' in str(val) and lock == 0:
-			cell.set_explicit_value('{0}'.format(val), data_type='f')
-			cell.number_format = '#0.00000'
-			lock = 1
-		try:
-			if lock == 0 and str(val)[0].isdigit() or str(val)[1].isdigit():
-				cell.set_explicit_value('{0}'.format(val), data_type='n')
-				cell.number_format = '#0.00000'
-				lock = 1
-		except:
-			pass
-		if lock == 0 or lock == 2:
-			cell.set_explicit_value('{0}'.format(val), data_type='s')
-	def save(self, path=None,  name='QLFs.xlsx'):
-		try:
-			self.wb.remove(self.wb.get_sheet_by_name('Sheet'))
-		except:
-			pass
-		if path == None:
-			path = self.opath
-		self.wb.save(filename='{0}/{1}'.format(path, name))#									||
+def getYAML(path):
+	with open(path, 'r') as doc:#										||
+		dikt = yload(doc.read().replace('\t','  '), Loader=Loader)#		||
+	return dikt
+
+
 def columnCollector(column, srow, erow):
 	''
 	vals = []
@@ -164,6 +90,7 @@ def columnScanner(column, slimit, elimit, inc=False):
 		if endrow is not None:
 			endrow = endrow - 1
 	return startrow, endrow
+
 def creScatterChart(ws, reports, scol, ecol, srow, erow, minn, maxx, lsl, usl, brdrcol, cfg={}):
 	''
 	if cfg != {}:
@@ -226,51 +153,7 @@ def creScatterChart(ws, reports, scol, ecol, srow, erow, minn, maxx, lsl, usl, b
 	props = xl.chart.shapes.GraphicalProperties(solidFill='404040')#"767171")
 	chart.graphical_properties = props
 	return chart
-def styleSheet(ws, stylemap, cfg=None):
-	''
-	ws.page_setup.orientation = ws.ORIENTATION_LANDSCAPE
-	ws.page_setup.paperSize = ws.PAPERSIZE_LETTER
-	ws.page_setup.fitToHeight = 0
-	ws.page_setup.fitToWidth = 1
-	if cfg != None:
-		ws.sheet_properties.tabColor = cfg['tabColor']
-	for area in sorted(stylemap.keys()):
-		cfg = stylemap[area]
-		for row in range(cfg['range']['minrow'], cfg['range']['maxrow']):
-			for col in range(cfg['range']['mincol'], cfg['range']['maxcol']):
-				cell = ws[getLetter(col)+str(row)]
-#				print('Cell',cell)
-				try:
-					cell.style = cfg['style']
-#					print('CELL', cell)
-				except Exception as e:
-#					print('CELL Tuple Problem', e,cell)
-					cell[0].style = cfg['style']
-				if 'datatype' in cfg.keys():
-					cell.set_explicit_value(cell.value, data_type=cfg['datatype'])
-		if 'rules' in cfg.keys():
-			if cfg['rules'] != None:
-				for rule in sorted(cfg['rules'].keys()):
-					params = cfg['rules'][rule]
-					brng = getLetter(cfg['range']['mincol'])+str(cfg['range']['minrow'])
-					erng = getLetter(cfg['range']['maxcol'])+str(cfg['range']['maxrow'])
-					rang = '$'+brng+':$'+erng
-					if params['type'] == 'CellIsRule':
-						colors = params['params']['fill']
-						params['params']['fill'] = xl.styles.PatternFill(**colors)
-						try:
-							params['params']['font'] = xl.styles.Font(color=params['params']['font'])
-						except:
-							pass
-						rule = xl.formatting.rule.CellIsRule(**params['params'])
-					else:
-						fill = xl.styles.PatternFill(bgColor=params['params']['color']['fill'],
-													fgColor=params['params']['color']['fill'])
-						font = xl.styles.Font(color=params['params']['color']['font'])
-						dxf = xl.styles.differential.DifferentialStyle(font=font, fill=fill)
-						rule = xl.formatting.rule.Rule(type=params['params']['type'], dxf=dxf)
-						rule.formula = params['params']['formula']
-					ws.conditional_formatting.add(rang,rule)
+
 def createStyle(name, cfg):#											||
 	cfg = cfg['Styles']
 	style = xl.styles.NamedStyle(name=name)#							||
@@ -290,21 +173,7 @@ def createStyle(name, cfg):#											||
 	style.alignment = xl.styles.Alignment(**cfg['Alignment'])#			||
 	style.protection = xl.styles.Protection(**cfg['Protection'])
 	return style
-def wsScanner(ws):
-	records = []
-	rows = ws.values
-	rcnt = 1
-	while True:
-		try:
-			if rcnt == 1:
-				columns = [x for x in list(next(rows)) if x != None]
-			else:
-				records.append(list(next(rows))[:len(columns)])
-			rcnt += 1
-		except Exception as e:
-			print(e)
-			break
-	return columns, records
+
 def creWSTable(data, sheetTMPLT=None):
 	styles = sheetTMPLT['styles']
 	fdmap, sizemaps = {}, {'columnmap': {}, 'rowmap': {}}
@@ -332,6 +201,15 @@ def creWSTable(data, sheetTMPLT=None):
 		if i not in sizemaps['rowmap'].keys():#							||
 			sizemaps['rowmap'][i] = 15.75#								||
 	return fdmap, stmap, sizemaps
+
+def loadWBDF(path, sheet):
+	''' '''
+	return read_excel(path, sheet_name=sheet, engine='openpyxl')
+
+def loadCSVDF(path):
+	''' '''
+	return read_csv(path, engine='python', index_col=False)
+
 def mapAREA(data, scol=0, srow=1, how='table'):
 	''
 	mapp = {}
@@ -361,6 +239,7 @@ def mapAREA(data, scol=0, srow=1, how='table'):
 				mapp[position] = colv
 		rown += 1
 	return mapp, coln, rown
+
 def mapTableAREA(name, head=None, body=None, foot=None, aCNT=0,#		||
 								scol=0, rown=1, fdmap={}, cfgs=None):#	||
 	'Create a cell dictionary mapped to a column/row grid'#				||
@@ -411,6 +290,7 @@ def mapTableAREA(name, head=None, body=None, foot=None, aCNT=0,#		||
 	stmap[ftrAREA]['range']['maxcol'] = maxcoln+1#						||
 	mapp = {'value': fdmap, 'stmap': stmap}#							||
 	return mapp, coln, rown, aCNT#										||
+
 def sanSheetName(n):#													||
 	''#													||
 	subs = ['[', ']', '/']#												||
@@ -418,6 +298,53 @@ def sanSheetName(n):#													||
 		if sub in n:#													||
 			n = n.replace(sub, '')#										||
 	return n#															||
+
+def styleSheet(ws, stylemap, cfg=None):
+	''
+	ws.page_setup.orientation = ws.ORIENTATION_LANDSCAPE
+	ws.page_setup.paperSize = ws.PAPERSIZE_LETTER
+	ws.page_setup.fitToHeight = 0
+	ws.page_setup.fitToWidth = 1
+	if cfg != None:
+		ws.sheet_properties.tabColor = cfg['tabColor']
+	for area in sorted(stylemap.keys()):
+		cfg = stylemap[area]
+		for row in range(cfg['range']['minrow'], cfg['range']['maxrow']):
+			for col in range(cfg['range']['mincol'], cfg['range']['maxcol']):
+				cell = ws[getLetter(col)+str(row)]
+#				print('Cell',cell)
+				try:
+					cell.style = cfg['style']
+#					print('CELL', cell)
+				except Exception as e:
+#					print('CELL Tuple Problem', e,cell)
+					cell[0].style = cfg['style']
+				if 'datatype' in cfg.keys():
+					cell.set_explicit_value(cell.value, data_type=cfg['datatype'])
+		if 'rules' in cfg.keys():
+			if cfg['rules'] != None:
+				for rule in sorted(cfg['rules'].keys()):
+					params = cfg['rules'][rule]
+					brng = getLetter(cfg['range']['mincol'])+str(cfg['range']['minrow'])
+					erng = getLetter(cfg['range']['maxcol'])+str(cfg['range']['maxrow'])
+					rang = '$'+brng+':$'+erng
+					if params['type'] == 'CellIsRule':
+						colors = params['params']['fill']
+						params['params']['fill'] = xl.styles.PatternFill(**colors)
+						try:
+							params['params']['font'] = xl.styles.Font(color=params['params']['font'])
+						except:
+							pass
+						rule = xl.formatting.rule.CellIsRule(**params['params'])
+					else:
+						fill = xl.styles.PatternFill(bgColor=params['params']['color']['fill'],
+													fgColor=params['params']['color']['fill'])
+						font = xl.styles.Font(color=params['params']['color']['font'])
+						dxf = xl.styles.differential.DifferentialStyle(font=font, fill=fill)
+						rule = xl.formatting.rule.Rule(type=params['params']['type'], dxf=dxf)
+						rule.formula = params['params']['formula']
+					ws.conditional_formatting.add(rang,rule)
+
 def writeWS(name, wb, fdmap, stylemap=None, sizemaps=None):
 	''
 	sheet = wb.creWS(name)#														||
@@ -429,15 +356,125 @@ def writeWS(name, wb, fdmap, stylemap=None, sizemaps=None):
 		if 'rowmap' in sizemaps.keys():
 			wb.setRowHeights(sheet, sizemaps['rowmap'])
 	wb.mapDict2Cells(sheet, fdmap)
+
 def writeWB(data, path=None, name=None):
 	''
 	wb = workBookWriter()
 	fdmap, coln, rown = mapAREA(data)
-#	print('FDmap', fdmap.keys())
 	writeWS('Data', wb, fdmap)
-	wb.save(path, '{0}.xlsx'.format(name))
-#	print('Path', path)
-def getYAML(path):
-	with open(path, 'r') as doc:#										||
-		dikt = yload(doc.read().replace('\t','  '), Loader=Loader)#		||
-	return dikt
+	wb.save(path, f'{name}.xlsx')
+
+def wsScanner(ws):
+	records = []
+	rows = ws.values
+	rcnt = 1
+	while True:
+		try:
+			if rcnt == 1:
+				columns = [x for x in list(next(rows)) if x != None]
+			else:
+				records.append(list(next(rows))[:len(columns)])
+			rcnt += 1
+		except Exception as e:
+			print(e)
+			break
+	return columns, records
+
+class workBookWriter(object):
+	''' '''
+	def __init__(self):
+		self.wb = xl.Workbook()
+		self.createFormats()
+
+	def creWS(self, name):
+		''' '''
+		return self.wb.create_sheet(title=sanSheetName(name))
+
+	def createFormats(self, cfgs=None):
+		''' '''
+		if cfgs == None:
+			FORMATS = getYAML(f'{here}_data_/sheet.yaml')
+		else:
+			FORMATS = getYAML(cfgs['xl'])
+		for style in sorted(FORMATS['dargs']['areas'].keys()):
+			cfg = FORMATS['dargs']['areas'][style]
+			self.wb.add_named_style(createStyle(style, cfg))
+
+	def setColumnWidths(self, ws, mapp):
+		''
+		for col in sorted(mapp.keys()):
+			ws.column_dimensions[col].width = mapp[col]
+
+	def setRowHeights(self, ws, mapp):
+		''
+		for row in sorted(mapp.keys()):
+			ws.row_dimensions[row].height = mapp[row]
+
+	def mapDataFrame2Cells(self, ws, df, write_cols=None):
+		''' '''
+		if write_cols:
+			ccnt = 1
+			for col in list(df.columns):
+				_ = ws.cell(column=ccnt, row=1, value=col)
+				ccnt += 1
+		rcnt = 2
+		datat = df.values.tolist()
+		for row in datat:
+			ccnt = 1
+			for col in row:
+				try:
+					_ = ws.cell(column=ccnt, row=rcnt, value=col)
+				except:
+					print('map Data Failed', ccnt, rcnt)
+					print('Due to', e)
+				ccnt += 1
+			rcnt += 1
+
+	def mapTable2Cells(self, ws, datat):#								||
+		''
+		rcnt = 1#														||
+		datat.sort()
+		for row in datat:#												||
+			ccnt = 1#													||
+			row.sort()
+			for col in row:#											||
+				_ = ws.cell(column=ccnt, row=rcnt,)#	||
+				setCellValue(_, col)
+				ccnt += 1
+			rcnt += 1
+
+	def mapDict2Cells(self, ws, datad):
+		''' '''
+		for key in sorted(datad.keys()):
+			try:
+				_ = ws.cell(column=ws[key].col_idx, row=ws[key].row)#	||
+			except Exception as e:
+				print('Map Cell Failed key', key, e, ws[key])
+			self.setCellValue(_, datad[key])
+
+	def setCellValue(self, cell, val, cfg=None):
+		lock = 0
+		if val == '' or val == None:
+			lock = 2
+		if '=' in str(val) and lock == 0:
+			cell.set_explicit_value(f'{val}', data_type='f')
+			cell.number_format = '#0.00000'
+			lock = 1
+		try:
+			check_val = str(val).replace("'", '').replace('$', '')
+			if lock == 0 and (check_val[0].isdigit() or check_val[1].isdigit()):
+				cell.set_explicit_value(f'{val}', data_type='n')
+				cell.number_format = '#0.00000'
+				lock = 1
+		except:
+			pass
+		if lock == 0 or lock == 2:
+			cell.set_explicit_value(f'{val}', data_type='s')
+
+	def save(self, path,  name):
+		''' '''
+		try:
+			self.wb.remove(self.wb.get_sheet_by_name('Sheet'))
+		except:
+			pass
+		self.wb.save(filename=f'{path}/{name}.xlsx')#									||

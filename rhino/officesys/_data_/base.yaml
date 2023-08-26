@@ -1,0 +1,16 @@
+---
+<(META)>:
+  DOCid:
+  name: Pheonix Molecules Ctrlr Office Database Configuration Document
+  description: >
+  expirary: <[expiration]>
+  version: <[version]>
+  path: <[LEXIvrs]>
+  outline: <[outline]>
+  authority: document|this
+  security: sec|lvl2
+  <(WT)>: -32
+Driver: >
+	{Microsoft Access Driver (*.mdb, *.accdb)};
+DBQ: >
+	<[path]>;

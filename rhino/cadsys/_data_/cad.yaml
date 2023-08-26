@@ -1,0 +1,45 @@
+<(META)>:
+  docid: <^[uuid]^>
+  name:
+  description: >
+  version: 0.0.0.0.0.0
+  expire: <^[expire]^>
+  here: <[path]>
+  outline:
+  <(WT)>:
+freecad:
+  cmds:
+  files:
+    <(PATH)>:
+  images:
+    <(PATH)>:
+  machines:
+    <(PATH)>:
+  services:
+dia:
+  cmds:
+  files:
+    <(PATH)>:
+  images:
+    <(PATH)>:
+  machines:
+    <(PATH)>:
+  services:
+gimp:
+  cmds:
+  files:
+    <(PATH)>:
+  images:
+    <(PATH)>:
+  machines:
+    <(PATH)>:
+  services:
+openscad:
+  cmds:
+  files:
+    <(PATH)>:
+  images:
+    <(PATH)>:
+  machines:
+    <(PATH)>:
+  services:
